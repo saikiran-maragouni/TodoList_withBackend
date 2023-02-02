@@ -174,6 +174,9 @@ if (port == null || port == "") {
 //   console.log("server started on port 3000");
 // });
 connectDB().then(() => {
+  if (port == null || port == "") {
+    port = 3000
+}
   app.listen(port, () => {
     console.log("JAGG listening for requests");
   });
