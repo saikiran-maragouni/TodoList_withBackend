@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 //lodash --> "_"
 const _ = require("lodash");
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,8 +21,8 @@ app.set('view engine', 'ejs');
 // for avoiding the deprecating warning
 mongoose.set('strictQuery', true);
 // connection to the mongodb port server
-mongoose.connect("mongodb+srv://saikiran_maragouni:sahithya@cluster0.xtp3wfs.mongodb.net/todoListDB");
-
+// mongoose.connect("mongodb+srv://saikiran_maragouni:sahithya@cluster0.xtp3wfs.mongodb.net/todoListDB");
+mongoose.connect("mongodb+srv://"+process.env.ADMIN_NAME +":"+process.env.ADMIN_PASS+"cluster0.xtp3wfs.mongodb.net/todoListDB", {useNewUrlParser: true});
 
 //Schema for the database
 const itemSchema = new mongoose.Schema({
@@ -153,6 +154,9 @@ app.get("/about", function (req, res) {
   res.render('about');
 });
 
+if (port == null || port == "") {
+  port = 3000
+} 
 app.listen(port, function () {
   console.log("server started on port 3000");
 });
