@@ -21,8 +21,21 @@ app.set('view engine', 'ejs');
 // for avoiding the deprecating warning
 mongoose.set('strictQuery', true);
 // connection to the mongodb port server
- mongoose.connect("mongodb+srv://saikiran_maragouni:sahithya@cluster0.xtp3wfs.mongodb.net/todoListDB", {useNewUrlParser: true});
-// mongoose.connect("mongodb+srv://"+process.env.ADMIN_NAME +":"+process.env.ADMIN_PASS+"@cluster0.xtp3wfs.mongodb.net/todoListDB", {useNewUrlParser: true});
+ //mongoose.connect("mongodb+srv://saikiran_maragouni:sahithya@cluster0.xtp3wfs.mongodb.net/todoListDB", {useNewUrlParser: true});
+ 
+
+
+
+const connectDB = async () => {
+  try {
+    mongoose.connect("mongodb+srv://"+process.env.ADMIN_NAME +":"+process.env.ADMIN_PASS+"@cluster0.xtp3wfs.mongodb.net/todoListDB", {useNewUrlParser: true});
+    console.log(`MongoDB Connected`);
+  } catch (error) {
+    console.log("NEW ERROR JAGG " + error);
+    process.exit(1);
+  }
+}
+
 
 //Schema for the database
 const itemSchema = new mongoose.Schema({
